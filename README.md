@@ -1,6 +1,6 @@
 # Dev Kombat — protótipo 1v1
 
-Projeto Unity 2D com a personagem Mariana configurada para o primeiro teste local.
+Projeto Unity 2D com a personagem Mariana configurada para o primeiro teste contra a CPU.
 
 ## Abrir pela primeira vez
 
@@ -17,10 +17,18 @@ Se a cena não for criada automaticamente, execute o menu:
 
 ## Controles
 
-- Jogador 1: `A/D`, `W`, `F`, `G`.
-- Jogador 2: setas esquerda/direita, seta para cima, `K`, `L`.
+- Jogador: `A/D` para mover, `W` para pular, `F` para socar e `G` para chutar.
+- O segundo lutador é controlado pelo computador.
 - Reiniciar round: `R`.
 
 O protótipo possui movimento, pulo, soco, chute, dano, derrota, vitória, câmera,
-chão e barras de vida. Os dois jogadores usam Mariana até que um segundo lutador
-seja criado.
+chão, limites de arena, barras de vida e uma IA básica. Jogador e CPU usam Mariana
+até que um segundo lutador seja criado.
+
+## Build para navegador
+
+Instale o módulo **WebGL Build Support** pelo Unity Hub e use:
+
+`Dev Kombat > Gerar Build WebGL de Teste`
+
+O resultado será criado em `Builds/WebGL`. A pasta `Builds` é ignorada pelo Git.
