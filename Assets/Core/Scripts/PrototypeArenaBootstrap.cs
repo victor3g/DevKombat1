@@ -14,7 +14,7 @@ namespace DevKombat.Fighters
         [SerializeField] private Color groundColor = new Color(0.18f, 0.2f, 0.25f);
 
         private FighterController playerOne;
-        private FighterController playerTwo;
+        private FighterController computer;
         private bool roundFinished;
         private string winnerMessage = string.Empty;
 
@@ -34,12 +34,12 @@ namespace DevKombat.Fighters
 
         private void Update()
         {
-            if (!roundFinished && playerOne != null && playerTwo != null)
+            if (!roundFinished && playerOne != null && computer != null)
             {
-                if (playerOne.IsDefeated || playerTwo.IsDefeated)
+                if (playerOne.IsDefeated || computer.IsDefeated)
                 {
                     roundFinished = true;
-                    winnerMessage = playerOne.IsDefeated ? "JOGADOR 2 VENCEU!" : "JOGADOR 1 VENCEU!";
+                    winnerMessage = playerOne.IsDefeated ? "CPU VENCEU!" : "VOCÊ VENCEU!";
                 }
             }
 
@@ -81,6 +81,9 @@ namespace DevKombat.Fighters
             renderer.size = new Vector2(18f, 0.8f);
             renderer.drawMode = SpriteDrawMode.Tiled;
             renderer.sortingOrder = -10;
+
+            CreateWall("LeftWall", new Vector2(-7.5f, 0f));
+            CreateWall("RightWall", new Vector2(7.5f, 0f));
         }
 
         private void CreatePlayers()
@@ -93,11 +96,23 @@ namespace DevKombat.Fighters
             firstInput.FaceRight(true);
 
             GameObject second = Instantiate(fighterPrefab, new Vector3(2.2f, -0.2f, 0f), Quaternion.identity);
-            second.name = "Mariana_P2";
-            playerTwo = second.GetComponent<FighterController>();
-            PrototypeFighter2D secondInput = second.GetComponent<PrototypeFighter2D>();
-            secondInput.ConfigureControls(KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.K, KeyCode.L);
-            secondInput.FaceRight(false);
+            second.name = "Mariana_CPU";
+            computer = second.GetComponent<FighterController>();
+            PrototypeFighter2D computerMotor = second.GetComponent<PrototypeFighter2D>();
+            computerMotor.SetPlayerInputEnabled(false);
+            firstInput.SetOpponent(second.transform);
+            computerMotor.SetOpponent(first.transform);
+            computerMotor.FaceRight(false);
+
+            PrototypeFighterAI computerAI = second.AddComponent<PrototypeFighterAI>();
+            computerAI.Initialize(first.transform);
+
+            SpriteRenderer computerRenderer = second.GetComponent<SpriteRenderer>();
+            if (computerRenderer != null)
+            {
+                // Pequena diferença visual enquanto só existe uma personagem.
+                computerRenderer.color = new Color(0.72f, 0.88f, 1f);
+            }
         }
 
         private void OnGUI()
@@ -110,10 +125,13 @@ namespace DevKombat.Fighters
             };
 
             DrawHealthBar(new Rect(30f, 30f, Screen.width * 0.38f, 28f), playerOne, false);
-            DrawHealthBar(new Rect(Screen.width * 0.62f - 30f, 30f, Screen.width * 0.38f, 28f), playerTwo, true);
+            DrawHealthBar(new Rect(Screen.width * 0.62f - 30f, 30f, Screen.width * 0.38f, 28f), computer, true);
+
+            GUI.Label(new Rect(30f, 4f, Screen.width * 0.38f, 24f), "MARIANA", label);
+            GUI.Label(new Rect(Screen.width * 0.62f - 30f, 4f, Screen.width * 0.38f, 24f), "CPU", label);
 
             GUI.Label(new Rect(20f, Screen.height - 62f, Screen.width - 40f, 28f),
-                "P1: A/D mover, W pular, F soco, G chute     |     P2: Setas mover/pular, K soco, L chute     |     R reiniciar",
+                "A/D: mover     W: pular     F: soco     G: chute     R: reiniciar",
                 label);
 
             if (roundFinished)
@@ -139,6 +157,14 @@ namespace DevKombat.Fighters
             GUI.color = Color.Lerp(Color.red, new Color(0.2f, 0.9f, 0.3f), ratio);
             GUI.DrawTexture(fill, Texture2D.whiteTexture);
             GUI.color = previous;
+        }
+
+        private static void CreateWall(string wallName, Vector2 position)
+        {
+            GameObject wall = new GameObject(wallName);
+            wall.transform.position = position;
+            BoxCollider2D collider = wall.AddComponent<BoxCollider2D>();
+            collider.size = new Vector2(0.5f, 8f);
         }
 
         private static Sprite CreateSquareSprite()
