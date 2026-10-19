@@ -9,12 +9,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Gerar arquivo de ativação
+      - name: Gerar instruções de ativação
         id: activation
-        uses: game-ci/unity-request-activation-file@v2
+        run: |
+          cat <<'EOF' > unity-activation-instructions.txt
+          A ação `game-ci/unity-request-activation-file` foi descontinuada e não funciona mais.
+
+          Para ativar o Unity com GameCI:
+          1. Gere a licença localmente pelo Unity Hub (arquivo `.ulf`).
+          2. Cadastre os segredos no repositório:
+             - UNITY_LICENSE
+             - UNITY_EMAIL
+             - UNITY_PASSWORD
+
+          Documentação oficial:
+          https://game.ci/docs/github/activation
+          EOF
 
       - name: Disponibilizar arquivo
         uses: actions/upload-artifact@v4
         with:
-          name: unity-activation-file
-          path: ${{ steps.activation.outputs.filePath }}
+          name: unity-activation-instructions
+          path: unity-activation-instructions.txt
