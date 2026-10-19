@@ -64,6 +64,12 @@ namespace DevKombat.Fighters
         private bool actionLocked;
         private bool defeated;
         private bool facingRight = true;
+        private bool acceptsPlayerInput = true;
+        private float movementInput;
+        private Transform opponent;
+
+        public bool CanAct => !defeated && !actionLocked && fighter != null && fighter.IsInitialized;
+        public bool IsGroundedNow => bodyCollider != null && IsGrounded();
 
         public void ConfigureControls(
             KeyCode left,
@@ -77,6 +83,50 @@ namespace DevKombat.Fighters
             jump = jumpKey;
             punch = punchKey;
             kick = kickKey;
+        }
+
+        public void SetPlayerInputEnabled(bool enabled)
+        {
+            acceptsPlayerInput = enabled;
+            if (!enabled)
+            {
+                movementInput = 0f;
+            }
+        }
+
+        public void SetMovementInput(float direction)
+        {
+            if (!defeated)
+            {
+                movementInput = Mathf.Clamp(direction, -1f, 1f);
+            }
+        }
+
+        public void SetOpponent(Transform target)
+        {
+            opponent = target;
+        }
+
+        public bool TryJump()
+        {
+            if (!CanAct || !IsGrounded())
+            {
+                return false;
+            }
+
+            body.linearVelocity = new Vector2(body.linearVelocity.x, fighter.JumpForce);
+            PlayAnimation(AnimationState.Jump, true);
+            return true;
+        }
+
+        public bool TryPunch()
+        {
+            return TryStartAttack(AnimationState.Punch, fighter.PunchDamage, punchDuration);
+        }
+
+        public bool TryKick()
+        {
+            return TryStartAttack(AnimationState.Kick, fighter.KickDamage, kickDuration);
         }
 
         private void Awake()
@@ -95,9 +145,9 @@ namespace DevKombat.Fighters
                 return;
             }
 
-            if (!actionLocked)
+            if (!actionLocked && acceptsPlayerInput)
             {
-                ReadActions();
+                ReadPlayerInput();
             }
         }
 
@@ -109,16 +159,27 @@ namespace DevKombat.Fighters
                 return;
             }
 
-            float direction = 0f;
-            if (Input.GetKey(moveLeft)) direction -= 1f;
-            if (Input.GetKey(moveRight)) direction += 1f;
+            float direction = movementInput;
+            if (acceptsPlayerInput)
+            {
+                direction = 0f;
+                if (Input.GetKey(moveLeft)) direction -= 1f;
+                if (Input.GetKey(moveRight)) direction += 1f;
+            }
 
             body.linearVelocity = new Vector2(direction * fighter.MoveSpeed, body.linearVelocity.y);
 
+            if (opponent != null)
+            {
+                FaceRight(opponent.position.x >= transform.position.x);
+            }
+
             if (direction != 0f)
             {
-                facingRight = direction > 0f;
-                spriteRenderer.flipX = !facingRight;
+                if (opponent == null)
+                {
+                    FaceRight(direction > 0f);
+                }
                 PlayAnimation(AnimationState.Walk);
             }
             else if (IsGrounded())
@@ -131,32 +192,38 @@ namespace DevKombat.Fighters
             }
         }
 
-        private void ReadActions()
+        private void ReadPlayerInput()
         {
-            if (Input.GetKeyDown(jump) && IsGrounded())
+            if (Input.GetKeyDown(jump))
             {
-                body.linearVelocity = new Vector2(body.linearVelocity.x, fighter.JumpForce);
-                PlayAnimation(AnimationState.Jump, true);
-            }
-
-            if (Time.time < nextAttackTime)
-            {
-                return;
+                TryJump();
             }
 
             if (Input.GetKeyDown(punch))
             {
-                StartCoroutine(Attack(AnimationState.Punch, fighter.PunchDamage, punchDuration));
+                TryPunch();
             }
             else if (Input.GetKeyDown(kick))
             {
-                StartCoroutine(Attack(AnimationState.Kick, fighter.KickDamage, kickDuration));
+                TryKick();
             }
+        }
+
+        private bool TryStartAttack(AnimationState state, float damage, float duration)
+        {
+            if (!CanAct || Time.time < nextAttackTime)
+            {
+                return false;
+            }
+
+            StartCoroutine(Attack(state, damage, duration));
+            return true;
         }
 
         private IEnumerator Attack(AnimationState state, float damage, float duration)
         {
             actionLocked = true;
+            movementInput = 0f;
             nextAttackTime = Time.time + duration + attackCooldown;
             body.linearVelocity = new Vector2(0f, body.linearVelocity.y);
             PlayAnimation(state, true);
@@ -211,6 +278,7 @@ namespace DevKombat.Fighters
             if (fighter.CurrentHealth <= 0f)
             {
                 defeated = true;
+                movementInput = 0f;
                 body.linearVelocity = Vector2.zero;
                 PlayAnimation(AnimationState.Defeat, true);
                 return;
@@ -223,6 +291,7 @@ namespace DevKombat.Fighters
         public void CelebrateVictory()
         {
             actionLocked = true;
+            movementInput = 0f;
             body.linearVelocity = Vector2.zero;
             PlayAnimation(AnimationState.Victory, true);
             fighter.PlayVictoryAudio();
