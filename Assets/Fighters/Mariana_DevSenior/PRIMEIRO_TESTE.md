@@ -23,16 +23,18 @@ o estado fica estático; com várias, elas são reproduzidas na ordem da lista.
 
 1. Crie uma cena 2D.
 2. Adicione um chão com `BoxCollider2D`.
-3. Arraste duas cópias de `Mariana.prefab` para a cena.
-4. Na segunda cópia, altere as teclas no componente para evitar conflito.
-5. Posicione os lutadores sobre o chão e pressione Play.
+3. Execute `Dev Kombat > Preparar Primeiro Teste` para criar a arena automaticamente.
+4. Abra `Assets/Core/Scenes/PrototypeArena.unity` e pressione Play.
 
-Controles padrão da primeira cópia:
+Controles do jogador:
 
 - `A` e `D`: andar.
 - `W`: pular.
 - `F`: socar.
 - `G`: chutar.
+- `R`: reiniciar a luta.
+
+O adversário é controlado automaticamente pela CPU.
 
 O script cria automaticamente `SpriteRenderer`, `Rigidbody2D` e
 `CapsuleCollider2D` quando esses componentes ainda não existirem.
