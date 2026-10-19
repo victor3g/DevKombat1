@@ -1,0 +1,20 @@
+name: Unity - Gerar arquivo de ativação
+
+on:
+  workflow_dispatch:
+
+jobs:
+  activation:
+    name: Solicitar ativação Unity
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Gerar arquivo de ativação
+        id: activation
+        uses: game-ci/unity-request-activation-file@v2
+
+      - name: Disponibilizar arquivo
+        uses: actions/upload-artifact@v4
+        with:
+          name: unity-activation-file
+          path: ${{ steps.activation.outputs.filePath }}

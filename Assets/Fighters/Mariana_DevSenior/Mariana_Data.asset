@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aed9b62e1ec84cc7a26e15771ee8c3e1, type: 3}
+  m_Name: Mariana_Data
+  m_EditorClassIdentifier: 
+  fighterName: Mariana
+  fighterTitle: Marizinha Dev Senior
+  selectionDescription: "Dev Jr. com ego de Tech Lead. Rápida, imprevisível e capaz de derrubar o servidor com uma linha de código."
+  selectionPortrait: {fileID: 0}
+  archetype: 1
+  fightingStyle: Ataques rápidos e erráticos baseados em cafeína e pânico, mantendo pressão constante com tecladas e bugs visuais.
+  preferredRange: Curta
+  mainStrength: Velocidade de ataque e combos muito rápidos.
+  mainWeakness: Defesa baixa e vulnerabilidade a contra-ataques quando erra a aproximação.
+  maxHealth: 90
+  moveSpeed: 7
+  jumpForce: 13
+  punchDamage: 8
+  kickDamage: 12
+  punchDescription: Um tapa rápido com um teclado mecânico RGB. Letras e teclas voam no impacto.
+  kickDescription: Chute reto no joelho com um aviso amarelo de erro de sintaxe.
+  crouchingAttackDescription: Rasteira deslizando como se estivesse em uma cadeira de escritório com rodinhas.
+  aerialAttackDescription: Golpe duplo para baixo com o notebook fechado, usado como marreta.
+  throwDescription: "Agarra o oponente, grita 'ISSO É FEATURE, NÃO É BUG!' e o arremessa."
+  specialMoves:
+  - moveName: Coffee Rush
+    inputCommand: Baixo, Frente + Soco
+    description: Arremessa para frente o café fervendo da caneca.
+    visualEffect: Arco de líquido escuro com vapor e efeito de queimadura.
+    damage: 15
+    cooldown: 1
+    voiceLine: Toma esse café sem açúcar!
+  - moveName: Gambiarra / Git Push --force
+    inputCommand: Baixo, Trás + Chute
+    description: Some por um instante e reaparece atrás do oponente.
+    visualEffect: Glitch digital e pixels coloridos no ponto de origem.
+    damage: 0
+    cooldown: 3
+    voiceLine: Roda em produção!
+  ultimateMove:
+    moveName: TROLLOU O SERVIDOR (Kernel Panic)
+    inputCommand: Trás, Baixo, Frente + Soco Forte
+    description: Invoca um servidor, digita em um terminal neon e provoca uma chuva de erros seguida por uma explosão de código. Exige a barra especial cheia e atordoa por 1,5 segundo.
+    visualEffect: Tela azul, mensagens de erro vermelhas e explosão de código.
+    damage: 45
+    cooldown: 0
+    voiceLine: APAGUEI O BANCO DE DADOS SEM QUERER! CORREEEE!
+  introClips: []
+  hitClips: []
+  attackClips: []
+  victoryClips: []
+  animatorController: {fileID: 0}
+  dialogueLines:
+  - "Cuidado, meu código tá compilando e eu tô sem paciência!"
+  - "Quem foi que mexeu na minha branch?!"
+  - Ctrl+C!
+  - Ctrl+V!
+  - "Caraca, de onde veio esse bug?!"
+  - "Ugh! Isso violou a LGPD!"
+  - "Seu código nem compila, seu braço curto!"
+  - "Já tentou reiniciar a sua vida?"
+  - "Foi fácil! Nem precisei abrir o Stack Overflow."
+  - "Mais uma vitória commitada com sucesso!"
+  - "Foi culpa do estagiário..."
+  - "Essa sprint vai atrasar por sua culpa!"

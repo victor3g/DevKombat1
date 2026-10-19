@@ -1,0 +1,82 @@
+# -----------------------------------------------------------------------------
+# Unity: caches e arquivos regenerados pelo Editor
+# -----------------------------------------------------------------------------
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+[Ee]xported[Oo]bj/
+
+# Ferramentas importadas localmente pela Asset Store
+/[Aa]ssets/[Aa]sset[Ss]tore[Tt]ools*
+
+# Plugin do Rider gerado dentro de Assets
+/[Aa]ssets/Plugins/Editor/JetBrains*
+
+# -----------------------------------------------------------------------------
+# Builds locais
+# -----------------------------------------------------------------------------
+/[Bb]uild/
+/[Bb]uilds/
+*.apk
+*.aab
+*.app
+*.exe
+*.unitypackage
+
+# Gradle/Android gerados
+.gradle/
+gradle/
+local.properties
+
+# -----------------------------------------------------------------------------
+# Visual Studio, Rider, VS Code e outros editores
+# -----------------------------------------------------------------------------
+.vs/
+.idea/
+.vscode/
+.consulo/
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.DotSettings.user
+
+# Arquivos de projeto gerados pelo Visual Studio/MonoDevelop
+*.csproj.user
+*.unityproj
+*.sln.iml
+
+# -----------------------------------------------------------------------------
+# Sistema operacional e arquivos temporários
+# -----------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# Diagnósticos e serviços locais
+sysinfo.txt
+crashlytics-build.properties
+
+# Não ignore arquivos .meta: eles preservam GUIDs e referências dos assets Unity.
