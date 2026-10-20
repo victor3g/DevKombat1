@@ -1,5 +1,14 @@
 # Dev Kombat — protótipo 1v1
 
+> **Novo: base completa estilo Mortal Kombat.** Rounds, FINISH HIM, Fatality, sangue,
+> 24 habilidades do MK2 para dar aos amigos, CPU, 2 jogadores e treino.
+> Veja [Docs/KOMBAT.md](Docs/KOMBAT.md) para rodar e criar lutadores e
+> [Docs/O_QUE_FALTA.md](Docs/O_QUE_FALTA.md) para o que ainda falta.
+> Resumo: rode `python Tools/extrair_assets_mk.py`, abra o projeto e dê Play em
+> `Assets/Core/Scenes/KombatArena.unity`.
+>
+> O protótipo antigo da Mariana, descrito abaixo, continua em `PrototypeArena`.
+
 Projeto Unity 2D com a personagem Mariana configurada para o primeiro teste contra a CPU.
 
 ## Abrir pela primeira vez

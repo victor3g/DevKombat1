@@ -80,3 +80,11 @@ sysinfo.txt
 crashlytics-build.properties
 
 # Não ignore arquivos .meta: eles preservam GUIDs e referências dos assets Unity.
+
+# -----------------------------------------------------------------------------
+# Assets extraídos de jogos Mortal Kombat (Warner Bros./NetherRealm).
+# Servem só para testes locais e são recriados por Tools/extrair_assets_mk.py.
+# Não publique esses arquivos no GitHub.
+# -----------------------------------------------------------------------------
+/[Aa]ssets/[Rr]esources/[Kk]ombat/
+/[Aa]ssets/[Rr]esources/[Kk]ombat.meta

@@ -141,10 +141,14 @@ namespace DevKombat.Editor
 
         private static void ConfigureBuildSettings()
         {
-            EditorBuildSettings.scenes = new[]
+            // Mantém as outras cenas (como a KombatArena) e só acrescenta o protótipo.
+            List<EditorBuildSettingsScene> scenes = new List<EditorBuildSettingsScene>(EditorBuildSettings.scenes);
+            if (!scenes.Exists(scene => scene.path == ScenePath))
             {
-                new EditorBuildSettingsScene(ScenePath, true)
-            };
+                scenes.Add(new EditorBuildSettingsScene(ScenePath, true));
+            }
+
+            EditorBuildSettings.scenes = scenes.ToArray();
         }
     }
 }
