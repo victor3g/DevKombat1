@@ -39,6 +39,10 @@ MonoBehaviour:
     damage: 15
     cooldown: 1
     voiceLine: Toma esse café sem açúcar!
+    ability: 10
+    effectFrames: []
+    effectTint: {r: 0.55, g: 0.33, b: 0.15, a: 1}
+    sound: {fileID: 0}
   - moveName: Gambiarra / Git Push --force
     inputCommand: Baixo, Trás + Chute
     description: Some por um instante e reaparece atrás do oponente.
@@ -46,6 +50,10 @@ MonoBehaviour:
     damage: 0
     cooldown: 3
     voiceLine: Roda em produção!
+    ability: 32
+    effectFrames: []
+    effectTint: {r: 0.3, g: 1, b: 0.6, a: 1}
+    sound: {fileID: 0}
   ultimateMove:
     moveName: TROLLOU O SERVIDOR (Kernel Panic)
     inputCommand: Trás, Baixo, Frente + Soco Forte
@@ -54,6 +62,10 @@ MonoBehaviour:
     damage: 45
     cooldown: 0
     voiceLine: APAGUEI O BANCO DE DADOS SEM QUERER! CORREEEE!
+    ability: 90
+    effectFrames: []
+    effectTint: {r: 0.4, g: 0.6, b: 1, a: 1}
+    sound: {fileID: 0}
   introClips: []
   hitClips: []
   attackClips: []
@@ -72,3 +84,37 @@ MonoBehaviour:
   - "Mais uma vitória commitada com sucesso!"
   - "Foi culpa do estagiário..."
   - "Essa sprint vai atrasar por sua culpa!"
+  isFemale: 1
+  costumeColor: {r: 0.95, g: 0.78, b: 0.15, a: 1}
+  visualScale: 1.2
+  sprites:
+    idle: []
+    walk: []
+    crouch: []
+    jump: []
+    block: []
+    punch: []
+    kick: []
+    uppercut: []
+    sweep: []
+    special: []
+    grab: []
+    hit: []
+    knockdown: []
+    dizzy: []
+    victory: []
+    defeat: []
+    taunt: []
+  fatality:
+    moveName: Deploy na Sexta-Feira
+    inputCommand: Trás, Frente, Baixo + Soco Forte
+    description: "Faz um deploy em produção na sexta às 18h e o oponente explode junto com o servidor."
+    visualEffect: Explosão de código e pedaços voando.
+    damage: 0
+    cooldown: 0
+    voiceLine: "Funcionava na minha máquina!"
+    ability: 102
+    effectFrames: []
+    effectTint: {r: 1, g: 1, b: 1, a: 1}
+    sound: {fileID: 0}
+  announcerName: {fileID: 0}
